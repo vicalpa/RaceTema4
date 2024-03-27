@@ -188,24 +188,32 @@ cran2 %>%
 ```
 12. Ordena `cran2` en orden descendente según la variable `ip_id`.
 ```{r}
+cran2 %>%
+  arrange(desc(ip_id) )
 
 ```
 12. Ordena `cran2` según los valores de `package e ip_id`.
 ```{r}
-
+cran2 %>%
+  arrange(package, ip_id)
 ```
 13. Ordena `cran2` según los valores de `country` (ascendente), `r_version` (desdencente) e `ip_id`(ascendente).
 ```{r}
+cran2 %>%
+  arrange(country,desc(r_version) ,ip_id)
 ```
 14. Selecciona el subconjunto formado por las variables, del `cran`, `ip_id, package y size` 
 en este orden y almacénalas en `cran3`.
 ```{r}
-
+cran3<- cran2 %>%
+  select(ip_id, package, size)
 
 ```
 
 15. Crea una nueva variable en `cran3` llamada `size_mb` que contenga el tamaño de la descarga expresado en Mbytes ($1Mbyte=2^{20}$ bytes).
 ```{r}
+cran3 <- cran3 %>%
+  mutate(size, size_mb=size/2^20)
 
 
 ```
