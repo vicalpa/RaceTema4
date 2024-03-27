@@ -259,19 +259,12 @@ elementos distintos,`n_distinct()` de la variables `ip_id y country`, y el
 la mediana (función `stats::median`) de la variable `size` y almacénalos en las variables `count, unique, countries y med_bytes` respectivamente. El resultado del sumario se almacenará en `pack_sum`.
 
 ```{r}
-pack_sum <-cran %>%
-  group_by(package)%>%
-  summary(count=n(), unique=n_distinct(ip_id),countries = n_distinct(country), avg_bytes = mean(size))
+  pack_sum<-by_package %>%
+
+  summarise(count=n(), unique=n_distinct(ip_id),countries = n_distinct(country), avg_bytes = mean(size))
 
 
-
-
-
-
-
-
-
-
+pack_sum
 
 
 
@@ -290,10 +283,8 @@ pack_sum <-cran %>%
 22. Muestra el 1% de los paquetes que han sido más descargados. Para ello puedes utilizar la función `quantile(????, probs=0.99)`. Siendo ??? la variable de interés, que te permitirá estimar el umbral. Los valores por encima serán los que nos interesen. Almacena estos paquetes **top descargas** en la variable `top_counts`. **NOTA: De ahora en adelante concatena todas las operaciones partiendo del elemento `cran`, usando _pipes_**.
 ```{r}
 
-
-
-
-
+top_counts<-pack_sum %>%
+  filter(count>quantile(count,probs=0.99, rm.na=T) )
 
 ```
 23. Repite el apartado anterior utilizando **pipes** para que finalmente el resultado se ordene, en orden descendente, según el número de descargas (`count`) y se almacene el la variable `top_counts_sorted`
