@@ -152,7 +152,6 @@ cran %>%
 ```
 6. Elige aquellas descargas realizadas desde España (ES), con versiones de R superiores a la 3.4.0
 ```{r}
-cran$r_version<- as.character(cran$r_version)
 
 cran %>%
   filter(country=="ES" )
@@ -160,18 +159,21 @@ cran %>%
 
 7. Elige aquellas descargas realizadas desde España (ES), o Portugal (PT).
 ```{r}
-
+cran %>% 
+  filter(country=="ES" | country=="PT")
 
 
 ```
 
 8. Elige aquellas descargas cuyo tamaño supera los 100500 bytes desde un sistema operativo  `linux-gnu`.
 ```{r}
-
+cran %>%
+  filter(size>100500 & r_os=="linux-gnu")
 ```
 9. Elige aquellas descargas en las que la versión del sistema operativo no está vacía.
 ```{r}
-
+cran %>%
+  filter(is.na(version)==FALSE)
 ```
 10. Almacena en `cran2` todas las columnas entre `size` y `ip_id`. 
 ```{r}
