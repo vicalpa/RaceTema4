@@ -59,7 +59,7 @@ opts_chunk$set(echo=T,message = F, error = F, warning = F, comment = NA, fig.ali
 ```{r,echo=FALSE}
 
 library(pacman)
-p_load(dplyr,lubridate, tidyr,ggplot2, readr)
+p_load(dplyr,lubridate, tidyr,ggplot2, readr, stringr)
 
 ```
 
@@ -152,7 +152,10 @@ cran %>%
 ```
 6. Elige aquellas descargas realizadas desde España (ES), con versiones de R superiores a la 3.4.0
 ```{r}
+cran$r_version<- as.character(cran$r_version)
 
+cran %>%
+  filter(country=="ES" )
 ```
 
 7. Elige aquellas descargas realizadas desde España (ES), o Portugal (PT).
